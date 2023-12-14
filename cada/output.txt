@@ -1,0 +1,18 @@
+1
+
+
+
+define event charisma_calculation on table characters when $before.ability_scores.charisma.calculator != $after.ability_scores.charisma.calculator AND $event != "DELETE" AND $event != "CREATE" then {
+        let $calculator = $after.ability_scores.charisma.calculator;
+        let $absolute = $calculator.absolute_set_to;
+        let $cha = $calculator.base + $calculator.add_to_base;
+        let $set_to = $calculator.set_to;
+        update $after set ability_scores.charisma.val =
+            if $absolute >= 0 then
+                $absolute
+            else if $set_to > $cha then
+                $set_to
+            else
+                $cha
+            end;
+}

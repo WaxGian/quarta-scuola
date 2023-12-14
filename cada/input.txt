@@ -1,0 +1,13 @@
+2
+1234
+1324
+
+remove field ability_scores.charisma on table characters;
+define field ability_scores.charisma.val on table characters type int default 0;
+define field ability_scores.charisma.calculator.absolute_set_to on table characters type int default -1;
+define field ability_scores.charisma.calculator.set_to on table characters type int default 0;
+define field ability_scores.charisma.calculator.base on table characters type int default 0;
+define field ability_scores.charisma.calculator.add_to_base on table characters type int default 0;
+
+delete characters;
+create characters:marco;
